@@ -9,40 +9,41 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@Api("Authors management")
+@Api("Users management")
 public interface AuthorControllerDocs {
 
-    @ApiOperation(value = "Author creation operation")
+    @ApiOperation(value = "User creation operation")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Success author creation"),
-            @ApiResponse(code = 400, message = "Missing required fields, wrong field range value or author already registered on system")
+            @ApiResponse(code = 201, message = "Success user creation"),
+            @ApiResponse(code = 400, message = "Missing required fields, wrong field range value or user already registered on system")
     })
     AuthorDTO create(AuthorDTO authorDTO);
 
-    @ApiOperation(value = "Find author by Id operation")
+    @ApiOperation(value = "Find user by Id operation")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success author found"),
-            @ApiResponse(code = 404, message = "Author not found error code")
+            @ApiResponse(code = 200, message = "Success user found"),
+            @ApiResponse(code = 404, message = "User not found error code")
     })
     AuthorDTO findById(@PathVariable Long id);
 
-    @ApiOperation(value = "List all registered authors")
+    @ApiOperation(value = "List all registered users")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Return all registered authors"),
+            @ApiResponse(code = 200, message = "Return all registered users"),
     })
     List<AuthorDTO> findAll();
 
-    @ApiOperation(value = "Delete author by id operation")
+    @ApiOperation(value = "Delete user by id operation")
     @ApiResponses(value = {
-            @ApiResponse(code = 204, message = "Success author deleted"),
-            @ApiResponse(code = 404, message = "Author not found error code")
+            @ApiResponse(code = 204, message = "Success user deleted"),
+            @ApiResponse(code = 404, message = "User not found error code")
     })
     void delete(Long id);
 
-    @ApiOperation(value = "Author update operation")
+    @ApiOperation(value = "User update operation")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success author updated"),
-            @ApiResponse(code = 400, message = "Missing required fields, wrong field range value or author already registered on system")
+            @ApiResponse(code = 200, message = "Success user updated"),
+            @ApiResponse(code = 400, message = "Missing required fields, wrong field range" +
+                    "value or user already registered on system")
     })
     void update(Long id, AuthorDTO authorToUpdateDTO);
 }

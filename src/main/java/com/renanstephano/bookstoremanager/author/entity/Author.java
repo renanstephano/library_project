@@ -1,12 +1,9 @@
 package com.renanstephano.bookstoremanager.author.entity;
 
-import com.renanstephano.bookstoremanager.books.entity.Book;
 import com.renanstephano.bookstoremanager.entity.Auditable;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
-
 
 @Data
 @Entity
@@ -19,9 +16,12 @@ public class Author extends Auditable {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(columnDefinition = "integer default 0")
-    private int age;
+    @Column(nullable = false)
+    private String address;
 
-    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-    private List<Book> books;
+    @Column(nullable = false)
+    private String city;
+
+    @Column(nullable = false, unique = true)
+    private String email;
 }
