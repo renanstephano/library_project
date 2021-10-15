@@ -53,7 +53,7 @@ public class AuthorService {
         authorRepository.deleteById(id);
     }
 
-    private Author verifyAndGetAuthor(Long id) {
+    public Author verifyAndGetAuthor(Long id) {
         Author foundAuthor = authorRepository.findById(id)
                 .orElseThrow(() -> new AuthorNotFoundException(id));
         return foundAuthor;
