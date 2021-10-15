@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 @ControllerAdvice
 public class BookstoreExceptionHandler extends ResponseEntityExceptionHandler {
@@ -31,6 +30,7 @@ public class BookstoreExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    @ExceptionHandler(EntityExistsException.class)
     public ResponseEntity<Object> handleEntityExistsException(EntityExistsException exception) {
 
         return buildResponseEntity(

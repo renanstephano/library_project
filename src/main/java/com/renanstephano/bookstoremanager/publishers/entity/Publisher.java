@@ -5,7 +5,6 @@ import com.renanstephano.bookstoremanager.entity.Auditable;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -19,11 +18,8 @@ public class Publisher extends Auditable {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false, unique = true, length = 100)
-    private String code;
-
-    @Column(nullable = false, columnDefinition = "TIMESTAMP")
-    private LocalDate foundationDate;
+    @Column(nullable = false)
+    private String city;
 
     @OneToMany(mappedBy = "publisher", fetch = FetchType.LAZY)
     private List<Book> books;
