@@ -41,4 +41,14 @@ public class PublisherService {
                 .map(publisherMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    public void delete(Long id){
+        verifyIfExists(id);
+        publisherRepository.deleteById(id);
+    }
+
+    private void verifyIfExists(Long id) {
+        publisherRepository.findById(id)
+                        .orElseThrow(() -> new PublisherNotFoundException(id));
+    }
 }
