@@ -1,5 +1,6 @@
 package com.renanstephano.bookstoremanager.publishers.service;
 
+
 import com.renanstephano.bookstoremanager.publishers.dto.PublisherDTO;
 import com.renanstephano.bookstoremanager.publishers.entity.Publisher;
 import com.renanstephano.bookstoremanager.publishers.exception.PublisherNotFoundException;
@@ -50,5 +51,21 @@ public class PublisherService {
     private void verifyIfExists(Long id) {
         publisherRepository.findById(id)
                         .orElseThrow(() -> new PublisherNotFoundException(id));
+    }
+
+    private Publisher verifyAndGetPublisher(Long id) {
+        Publisher foundPublisher = publisherRepository.findById(id)
+                .orElseThrow(() -> new PublisherNotFoundException(id));
+        return foundPublisher;
+    }
+
+    public void update(Long id, PublisherDTO publisherToUpdateDTO){
+        Publisher foundPublisher = verifyAndGetPublisher(id);
+
+        publisherToUpdateDTO.setId(foundPublisher.getId());
+        Publisher publisherToUpdate = publisherMapper.toModel(publisherToUpdateDTO);
+        publisherToUpdate.setCreatedDate(foundPublisher.getCreatedDate());
+
+        Publisher publisherUpdated = publisherRepository.save(publisherToUpdate);
     }
 }

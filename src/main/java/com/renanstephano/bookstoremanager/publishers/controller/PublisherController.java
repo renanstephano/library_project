@@ -41,4 +41,9 @@ public class PublisherController implements PublisherControllerDocs{
     public void delete(@PathVariable Long id) {
         publisherService.delete(id);
     }
+
+    @PutMapping("/{id}")
+    public void update(@PathVariable Long id, @RequestBody @Valid PublisherDTO publisherToUpdateDTO) {
+        publisherService.update(id, publisherToUpdateDTO);
+    }
 }
