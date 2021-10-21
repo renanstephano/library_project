@@ -53,7 +53,7 @@ public class PublisherService {
                         .orElseThrow(() -> new PublisherNotFoundException(id));
     }
 
-    private Publisher verifyAndGetPublisher(Long id) {
+    public Publisher verifyAndGetPublisher(Long id) {
         return publisherRepository.findById(id)
                 .orElseThrow(() -> new PublisherNotFoundException(id));
     }

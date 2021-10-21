@@ -1,4 +1,4 @@
-package com.renanstephano.bookstoremanager.author.dto;
+package com.renanstephano.bookstoremanager.user.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthorDTO {
+public class UserDTO {
 
     private Long id;
 
