@@ -47,6 +47,13 @@ public class BookService {
     private void verifyIfExists(String bookName) {
         bookRepository.findByName(bookName)
                 .ifPresent(book -> {
+                    throw new BookAlreadyExistsException(bookName);
+                });
+    }
+
+    private void verifyIfDoesNotExists(String bookName) {
+        bookRepository.findByName(bookName)
+                .ifPresent(book -> {
                     throw new BookNotFoundException(bookName);
                 });
     }
