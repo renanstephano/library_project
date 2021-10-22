@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import java.util.List;
+
 @Api("Books management")
 public interface BookControllerDocs {
 
@@ -18,10 +20,16 @@ public interface BookControllerDocs {
     })
     BookResponseDTO create(BookRequestDTO bookRequestDTO);
 
-    @ApiOperation(value = "Book creation operation")
+    @ApiOperation(value = "Book finding by Id operation")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success book found"),
             @ApiResponse(code = 404, message = "Book not found")
     })
     BookResponseDTO findById(Long bookId);
+
+    @ApiOperation(value = "List all books operation")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success books found"),
+    })
+    List<BookResponseDTO> findAllBooks();
 }
