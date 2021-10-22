@@ -16,12 +16,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 
     private static final String BASE_PACKAGE = "com.renanstephano.bookstoremanager";
-    private static final String API_TITLE = "Bookstore Manager Course";
-    private static final String API_DESCRIPTION = "Bookstore Manager API Professional";
+    private static final String API_TITLE = "WDA Library project";
+    private static final String API_DESCRIPTION = "This library project has been created for starting" +
+            " to study new technologies and advance the personal knowledgements in WDA company.";
     private static final String API_VERSION = "1.0.0";
     private static final String CONTACT_NAME = "Renan Medeiros";
     private static final String CONTACT_GITHUB = "https://github.com/renanstephano";
-    private static final String CONTACT_EMAIL = "renan@teste.com";
+    private static final String CONTACT_EMAIL = "medevmed@protonmail.com";
 
     @Bean
     public Docket api() {
