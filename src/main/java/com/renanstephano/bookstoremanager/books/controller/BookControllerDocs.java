@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -32,4 +33,11 @@ public interface BookControllerDocs {
             @ApiResponse(code = 200, message = "Success books found"),
     })
     List<BookResponseDTO> findAllBooks();
+
+    @ApiOperation(value = "Book deleting operation")
+    @ApiResponses(value = {
+            @ApiResponse(code = 204, message = "Success book deleted"),
+            @ApiResponse(code = 404, message = "Book not found")
+    })
+    void delete(@PathVariable Long bookId);
 }

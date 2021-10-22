@@ -36,4 +36,10 @@ public class BookController implements BookControllerDocs {
     public List<BookResponseDTO> findAllBooks() {
         return bookService.findAllBooks();
     }
+
+    @DeleteMapping("/{bookId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long bookId) {
+        bookService.delete(bookId);
+    }
 }

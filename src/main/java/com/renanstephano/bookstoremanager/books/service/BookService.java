@@ -8,10 +8,12 @@ import com.renanstephano.bookstoremanager.books.exception.BookNotFoundException;
 import com.renanstephano.bookstoremanager.books.mapper.BookMapper;
 import com.renanstephano.bookstoremanager.books.repository.BookRepository;
 import com.renanstephano.bookstoremanager.publishers.entity.Publisher;
+import com.renanstephano.bookstoremanager.publishers.exception.PublisherNotFoundException;
 import com.renanstephano.bookstoremanager.publishers.service.PublisherService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,6 +55,12 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public void delete(Long bookId){
+        verifyIfBookIdExists(bookId);
+        bookRepository.deleteById(bookId);
+    }
+
     private void verifyIfBookIsAlreadyRegistered(BookRequestDTO bookRequestDTO) {
         bookRepository.findByName(bookRequestDTO.getName())
                 .ifPresent(duplicatedBook -> {
@@ -65,5 +73,10 @@ public class BookService {
                 .ifPresent(book -> {
                     throw new BookAlreadyExistsException(bookName);
                 });
+    }
+
+    private void verifyIfBookIdExists(Long bookId) {
+         bookRepository.findById(bookId)
+                 .orElseThrow(() -> new BookNotFoundException(bookId));
     }
 }
