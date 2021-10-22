@@ -37,6 +37,12 @@ public class BookService {
         return bookMapper.toDTO(createdBook);
     }
 
+    public BookResponseDTO findById(Long bookId){
+        return bookRepository.findById(bookId)
+                .map(bookMapper::toDTO)
+                .orElseThrow(() -> new BookNotFoundException(bookId));
+    }
+
     private void verifyIfBookIsAlreadyRegistered(BookRequestDTO bookRequestDTO) {
         bookRepository.findByName(bookRequestDTO.getName())
                 .ifPresent(duplicatedBook -> {
@@ -48,13 +54,6 @@ public class BookService {
         bookRepository.findByName(bookName)
                 .ifPresent(book -> {
                     throw new BookAlreadyExistsException(bookName);
-                });
-    }
-
-    private void verifyIfDoesNotExists(String bookName) {
-        bookRepository.findByName(bookName)
-                .ifPresent(book -> {
-                    throw new BookNotFoundException(bookName);
                 });
     }
 }
