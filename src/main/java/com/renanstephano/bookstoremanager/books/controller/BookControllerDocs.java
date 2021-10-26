@@ -1,6 +1,5 @@
 package com.renanstephano.bookstoremanager.books.controller;
 
-import com.renanstephano.bookstoremanager.books.dto.BookDTO;
 import com.renanstephano.bookstoremanager.books.dto.BookRequestDTO;
 import com.renanstephano.bookstoremanager.books.dto.BookResponseDTO;
 import io.swagger.annotations.Api;
@@ -40,4 +39,11 @@ public interface BookControllerDocs {
             @ApiResponse(code = 404, message = "Book not found")
     })
     void delete(@PathVariable Long bookId);
+
+    @ApiOperation(value = "Book update operation")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success book updated"),
+            @ApiResponse(code = 400, message = "Missing required fields, wrong field range value or book already registered on system")
+    })
+    BookResponseDTO update(BookRequestDTO bookRequestDTO);
 }

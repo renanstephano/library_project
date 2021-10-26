@@ -24,33 +24,33 @@ public class PublisherService {
         this.publisherRepository = publisherRepository;
     }
 
-    public PublisherDTO create(PublisherDTO publisherDTO){
+    public PublisherDTO create(PublisherDTO publisherDTO) {
         Publisher publisherToCreate = publisherMapper.toModel(publisherDTO);
         Publisher createdPublisher = publisherRepository.save(publisherToCreate);
         return publisherMapper.toDTO(createdPublisher);
     }
 
-    public PublisherDTO findById(Long id){
+    public PublisherDTO findById(Long id) {
         return publisherRepository.findById(id)
                 .map(publisherMapper::toDTO)
                 .orElseThrow(() -> new PublisherNotFoundException(id));
     }
 
-    public List<PublisherDTO> findAll(){
+    public List<PublisherDTO> findAll() {
         return publisherRepository.findAll()
                 .stream()
                 .map(publisherMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         verifyIfExists(id);
         publisherRepository.deleteById(id);
     }
 
     public Publisher verifyIfExists(Long id) {
         return publisherRepository.findById(id)
-                        .orElseThrow(() -> new PublisherNotFoundException(id));
+                .orElseThrow(() -> new PublisherNotFoundException(id));
     }
 
     public Publisher verifyAndGetPublisher(Long id) {
@@ -58,7 +58,7 @@ public class PublisherService {
                 .orElseThrow(() -> new PublisherNotFoundException(id));
     }
 
-    public void update(Long id, PublisherDTO publisherToUpdateDTO){
+    public void update(Long id, PublisherDTO publisherToUpdateDTO) {
         Publisher foundPublisher = verifyAndGetPublisher(id);
 
         publisherToUpdateDTO.setId(foundPublisher.getId());
