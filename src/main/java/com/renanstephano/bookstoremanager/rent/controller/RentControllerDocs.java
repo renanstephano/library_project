@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Api("Rent management")
 public interface RentControllerDocs {
@@ -19,4 +20,10 @@ public interface RentControllerDocs {
             @ApiResponse(code = 400, message = "Missing required fields or wrong field range value")
     })
     RentResponseDTO create(RentRequestDTO rentRequestDTO);
+
+    @ApiOperation(value = "List all rents operation")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success rents found"),
+    })
+    List<RentResponseDTO> findAllRent();
 }
