@@ -43,21 +43,6 @@ public class PublisherService {
                 .collect(Collectors.toList());
     }
 
-    public void delete(Long id) {
-        verifyIfExists(id);
-        publisherRepository.deleteById(id);
-    }
-
-    public Publisher verifyIfExists(Long id) {
-        return publisherRepository.findById(id)
-                .orElseThrow(() -> new PublisherNotFoundException(id));
-    }
-
-    public Publisher verifyAndGetPublisher(Long id) {
-        return publisherRepository.findById(id)
-                .orElseThrow(() -> new PublisherNotFoundException(id));
-    }
-
     public void update(Long id, PublisherDTO publisherToUpdateDTO) {
         Publisher foundPublisher = verifyAndGetPublisher(id);
 
@@ -66,5 +51,21 @@ public class PublisherService {
         publisherToUpdate.setCreatedDate(foundPublisher.getCreatedDate());
 
         Publisher publisherUpdated = publisherRepository.save(publisherToUpdate);
+    }
+
+    public void delete(Long id) {
+        verifyIfExists(id);
+        publisherRepository.deleteById(id);
+    }
+
+    //    exceptions
+    public Publisher verifyIfExists(Long id) {
+        return publisherRepository.findById(id)
+                .orElseThrow(() -> new PublisherNotFoundException(id));
+    }
+
+    public Publisher verifyAndGetPublisher(Long id) {
+        return publisherRepository.findById(id)
+                .orElseThrow(() -> new PublisherNotFoundException(id));
     }
 }

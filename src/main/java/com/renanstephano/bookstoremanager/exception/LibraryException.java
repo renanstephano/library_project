@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 @ControllerAdvice
-public class BookstoreExceptionHandler extends ResponseEntityExceptionHandler {
+public class LibraryException extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException exception) {

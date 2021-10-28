@@ -24,42 +24,31 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserDTO create(UserDTO userDTO){
+    public UserDTO create(UserDTO userDTO) {
         verifyIfExists(userDTO.getName());
         User userToCreate = USER_MAPPER.toModel(userDTO);
         User createdUser = userRepository.save(userToCreate);
         return USER_MAPPER.toDTO(createdUser);
     }
 
-    public UserDTO findById(Long id){
+    public UserDTO findById(Long id) {
         User foundUser = verifyAndGetUser(id);
         return USER_MAPPER.toDTO(foundUser);
     }
 
-    public List<UserDTO> findAll(){
+    public List<UserDTO> findAll() {
         return userRepository.findAll()
                 .stream()
                 .map(USER_MAPPER::toDTO)
                 .collect(Collectors.toList());
     }
 
-    private void verifyIfExists(String authorName) {
-        userRepository.findByName(authorName)
-                .ifPresent(author -> {throw new UserAlreadyExistsException(authorName); });
-    }
-
-    public void delete(Long id){
+    public void delete(Long id) {
         verifyAndGetUser(id);
         userRepository.deleteById(id);
     }
 
-    public User verifyAndGetUser(Long id) {
-        User foundUser = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
-        return foundUser;
-    }
-
-    public void update(Long id, UserDTO userToUpdateDTO){
+    public void update(Long id, UserDTO userToUpdateDTO) {
         User foundUser = verifyAndGetUser(id);
 
         userToUpdateDTO.setId(foundUser.getId());
@@ -69,4 +58,16 @@ public class UserService {
         User userUpdated = userRepository.save(userToUpdate);
     }
 
+    //    exceptions
+    private void verifyIfExists(String username) {
+        userRepository.findByName(username)
+                .ifPresent(author -> {
+                    throw new UserAlreadyExistsException(username);
+                });
+    }
+
+    public User verifyAndGetUser(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+    }
 }

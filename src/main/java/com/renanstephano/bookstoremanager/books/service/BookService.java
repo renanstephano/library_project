@@ -66,6 +66,7 @@ public class BookService {
         bookRepository.deleteById(bookId);
     }
 
+//    exceptions
     public Book verifyAndGetBook(Long bookId) {
         return bookRepository.findById(bookId)
                 .orElseThrow(() -> new BookNotFoundException(bookId));
