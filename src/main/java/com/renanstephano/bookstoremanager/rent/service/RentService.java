@@ -54,6 +54,18 @@ public class RentService {
                 .collect(Collectors.toList());
     }
 
+    public RentResponseDTO update(RentRequestDTO rentRequestDTO) {
+        Book foundBook = bookService.verifyAndGetBook(rentRequestDTO.getBookId());
+        User foundUser = userService.verifyAndGetUser(rentRequestDTO.getUserId());
+
+        Rent rentToUpdate = rentMapper.toModel(rentRequestDTO);
+        rentToUpdate.setBook(foundBook);
+        rentToUpdate.setUser(foundUser);
+        Rent rentUpdated = rentRepository.save(rentToUpdate);
+
+        return rentMapper.toDTO(rentUpdated);
+    }
+
     public void deleteById(Long id) {
         rentRepository.deleteById(id);
     }

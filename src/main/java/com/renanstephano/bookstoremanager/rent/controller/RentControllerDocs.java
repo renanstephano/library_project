@@ -34,4 +34,11 @@ public interface RentControllerDocs {
             @ApiResponse(code = 404, message = "Rent not found")
     })
     void deleteById(@PathVariable Long id);
+
+    @ApiOperation(value = "Rent update operation")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success rent updated"),
+            @ApiResponse(code = 400, message = "Missing required fields, wrong field range value or rent already registered on system")
+    })
+    RentResponseDTO update(RentRequestDTO rentRequestDTO);
 }

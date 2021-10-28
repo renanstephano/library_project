@@ -22,6 +22,7 @@ public class RentController implements RentControllerDocs{
     public RentController(RentService rentService) {
         this.rentService = rentService;
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public RentResponseDTO create(@RequestBody @Valid RentRequestDTO rentRequestDTO) {
@@ -31,6 +32,11 @@ public class RentController implements RentControllerDocs{
     @GetMapping
     public List<RentResponseDTO> findAllRent() {
         return rentService.findAllRent();
+    }
+
+    @PutMapping
+    public RentResponseDTO update(@RequestBody @Valid RentRequestDTO rentRequestDTO) {
+        return rentService.update(rentRequestDTO);
     }
 
     @DeleteMapping("/{id}")
