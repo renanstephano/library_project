@@ -54,4 +54,8 @@ public class RentService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteById(Long id) {
+        rentRepository.deleteById(id);
+    }
+
 }

@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
@@ -26,4 +27,11 @@ public interface RentControllerDocs {
             @ApiResponse(code = 200, message = "Success rents found"),
     })
     List<RentResponseDTO> findAllRent();
+
+    @ApiOperation(value = "Rent deleting operation")
+    @ApiResponses(value = {
+            @ApiResponse(code = 204, message = "Success rent deleted"),
+            @ApiResponse(code = 404, message = "Rent not found")
+    })
+    void deleteById(@PathVariable Long id);
 }

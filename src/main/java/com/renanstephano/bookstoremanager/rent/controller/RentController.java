@@ -32,4 +32,10 @@ public class RentController implements RentControllerDocs{
     public List<RentResponseDTO> findAllRent() {
         return rentService.findAllRent();
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(Long id) {
+        rentService.deleteById(id);
+    }
 }
